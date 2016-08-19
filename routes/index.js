@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var http = require('http');
-var API_KEY = secrets.getSecrets().BREW_KEY;
+var API_KEY = require('./secrets').getSecrets().BREW_KEY;
 
 
 router.get('/', function(req, res, next) {
@@ -28,12 +28,11 @@ router.get('/:location', function(req, res, next) {
 			str += chunk;
 		});
 		response.on('end', function() {
-			console.log(str);
+			res.json(JSON.parse(str));
 		});
 	}
 
 	http.request(options, callback).end();
-
 });
 
 module.exports = router;
