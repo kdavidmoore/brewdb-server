@@ -19,7 +19,7 @@ router.get('/:location', function(req, res, next) {
 
 	var options = {
 		host: 'api.brewerydb.com',
-		path:'/v2/locations?locality=atlanta&key=' + API_KEY 
+		path: '/v2/locations?locality=' + encodeURI(locationToSend) + '&key=' + API_KEY 
 	};
 
 	var callback = function(response) {
