@@ -4,17 +4,11 @@ var http = require('http');
 var API_KEY = require('./secrets').getSecrets().BREW_KEY;
 
 
-router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Express' });
-});
-
-
 router.get('/:location', function(req, res, next) {
 
-
 	var locationToSend = req.params.location;
-	if (req.params.location === undefined) {
-		locationToSend = '';
+	if (!req.params.location) {
+		res.json({ failure: 'No location parameters set.' });
 	}
 
 	var options = {
